@@ -1,0 +1,72 @@
+Project Name: esp32c6_morse
+=================================
+Project Name: esp32c6_morse
+Target Board: ESP32-C6-LCD
+ESP-IDF Version: 5.4.1
+Programming Language: C
+Project Purpose:
+Simulate Morse code for the word "HELLO" by blinking the onboard RGB LED and optionally displaying "HELLO" on the built-in LCD.
+
+
+Overview:
+---------
+This project demonstrates how to simulate Morse code for the word "HELLO" on the ESP32-C6-LCD board using:
+1. An onboard RGB LED to blink Morse code signals (dot and dash).
+2. An ST7789 LCD to display the corresponding characters.
+
+Board Specifications:
+---------------------
+- SoC: ESP32-C6 (RISC-V, Wi-Fi 6, Bluetooth 5)
+- Display: 1.14" ST7789 SPI TFT LCD (172x320 resolution assumed)
+- RGB LED: Onboard WS2812B LED (1 pixel, GPIO8)
+- Buttons: BOOT and RESET (BOOT can be used for manual flashing mode)
+- USB-JTAG interface via COM4
+
+Features:
+---------
+- Blinks onboard RGB LED (GPIO8) to simulate Morse code (.... . .-.. .-.. ---) for "HELLO" using the RGB LED (dot = 200ms on, dash = 600ms on)
+- Displays static "HELLO" on the onboard ST7789 LCD
+- Delays between characters and words to simulate proper Morse timing
+- Uses FreeRTOS delay functions and esp_lcd for screen interaction
+- Uses RMT peripheral and led_strip component for LED control
+
+Hardware Configuration
+---------------------------------------------------------------------------------------------------------------------------------
+Peripheral        Description                                                           GPIO
+---------------------------------------------------------------------------------------------------------------------------------
+RGB LED          Onboard WS2812 (1 pixel)                                    GPIO8
+---------------------------------------------------------------------------------------------------------------------------------
+LCD                 ST7789 (172x320 via SPI)                                       MOSI=6, CLK=7, DC=15, CS=14, RST=21
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+Project File Structure:
+-----------------------
+esp32c6_morse/
+├── CMakeLists.txt                  ← Top-level CMake file
+├── sdkconfig.defaults              ← Default configuration settings
+├── esp32c6_morse_project.txt       ← Project overview and instructions
+└── main/
+    ├── main.c                      ← Your corrected Morse simulation code
+    └── CMakeLists.txt              ← Registers `main.c` with build system
+
+Notes:
+------
+- This project uses ESP-IDF v5.4.1
+- LCD driver: ST7789, SPI interface
+- LED control via RMT channel 0
+- Build and flash using: `idf.py set-target esp32c6 && idf.py build && idf.py -p COM4 flash`
+- Monitor serial output using: `idf.py -p COM4 monitor`
+- The official led_strip driver (led_strip.h , led_strip_rmt.c , led_strip_rmt.h) were manually downloaded from GitHub 
+
+
+
+[Compile and Flash]
+<bash from the root of the project> 
+
+idf.py set-target esp32c6
+idf.py build
+idf.py -p COM4 flash monitor
+
+
+Generated on: 2025-05-21 16:20:07
