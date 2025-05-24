@@ -1,0 +1,66 @@
+####################################################
+#    .gitignore file for esp32c6_morse project     #
+#                                                  #
+#  last update: 202505241838 (dc) - Initial setup  #
+####################################################
+
+# Build output — ignore
+/build/
+/*.bin
+/*.elf
+/*.map
+
+# ESP-IDF configuration - ignore
+/sdkconfig
+/sdkconfig.old
+/project_description.json
+CMakeLists.txt.user
+
+# IDF-specific logs and artifacts -ignore
+*.log
+*.tmp
+
+# VSCode and IDE configs -ignore
+.vscode/
+/*.code-workspace
+
+# Python cache -ignore
+__pycache__/
+/*.pyc
+*.pyo
+*.pyd
+
+# OS-specific files -ignore
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Compressed output -ignore
+*.zip
+
+# Dependency metadata -ignore
+dependencies.lock
+
+
+######################################################
+# Ignore all default files except explicitly tracked # 
+#     Do Not Ignore the following -- Track them      #
+######################################################
+
+
+# Source code — keep these tracked
+!*.c
+!*.h
+!*.yml
+
+# Default configuration setting -- Track them
+!sdkconfig.defaults
+!.gitignore
+
+# Dependency lock -- Track them
+!dependencies.lock
+
+# Documentation - Track them
+!/esp32c6_morse_project.txt
+!/doc/CHANGELOG.md
+!README.md
